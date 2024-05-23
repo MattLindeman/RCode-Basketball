@@ -1,0 +1,775 @@
+---
+title: "The Ups and Downs of College Basketball Shot Making"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+<style type="text/css">
+h1.title {
+font-size: 40px;
+text-align: center;
+}
+</style>
+
+```{r setup, include=FALSE}
+library(readxl)
+library(tidyverse)
+library(purrr)
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2021-22 Season Shot Log", y = "Points Per Shot",
+       title = "Rudi Williams Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2021-22 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + 1.3, xhigh - 1.3),
+                  ylim = c(0.5, 1.5)) +
+  theme_light()
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx", 
+                      sheet = "Rudi 22-23")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2022-23 Season Shot Log", y = "Points Per Shot",
+       title = "Rudi Williams Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2022-23 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + .75, xhigh - .75),
+                  ylim = c(0.5, 1.5)) +
+  theme_light()
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx", 
+                      sheet = "Waterman 21-22")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2021-22 Season Shot Log", y = "Points Per Shot",
+       title = "Noah Waterman Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2021-22 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + .75, xhigh - .75),
+                  ylim = c(0, 1.5)) +
+  theme_light()
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx", 
+                      sheet = "Waterman 22-23")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2022-23 Season Shot Log", y = "Points Per Shot",
+       title = "Noah Waterman Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2022-23 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + .75, xhigh - .75),
+                  ylim = c(0, 1.5)) +
+  theme_light()
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx", 
+                      sheet = "Askew 21-22")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2021-22 Season Shot Log", y = "Points Per Shot",
+       title = "Devin Askew Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2021-22 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + 1.1, xhigh - 1.1),
+                  ylim = c(0, 1.5)) +
+  theme_light()
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx", 
+                      sheet = "Askew 22-23")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2022-23 Season Shot Log", y = "Points Per Shot",
+       title = "Devin Askew Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2022-23 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + .4, xhigh - .4),
+                  ylim = c(0.5, 1.5)) +
+  theme_light()
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx", 
+                      sheet = "Stevenson 21-22")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2021-22 Season Shot Log", y = "Points Per Shot",
+       title = "Erik Stevenson Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2021-22 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + 1.1, xhigh - 1.1),
+                  ylim = c(0.3, 1.5)) +
+  theme_light()
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx", 
+                      sheet = "Stevenson 22-23")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2022-23 Season Shot Log", y = "Points Per Shot",
+       title = "Erik Stevenson Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2022-23 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + .5, xhigh - .5),
+                  ylim = c(0.5, 1.5)) +
+  theme_light()
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx", 
+                      sheet = "Sherfield 21-22")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2021-22 Season Shot Log", y = "Points Per Shot",
+       title = "Grant Sherfield Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2021-22 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + 1.1, xhigh - 1.1),
+                  ylim = c(0.5, 1.5)) +
+  theme_light()
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx", 
+                      sheet = "Sherfield 22-23")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2022-23 Season Shot Log", y = "Points Per Shot",
+       title = "Grant Sherfield Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2022-23 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + .5, xhigh - .5),
+                  ylim = c(0.5, 1.5)) +
+  theme_light()
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx", 
+                      sheet = "Fouss 21-22")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2021-22 Season Shot Log", y = "Points Per Shot",
+       title = "Fousseyni Traore Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2021-22 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + 1.2, xhigh - 1.2),
+                  ylim = c(0.5, 1.5)) +
+  theme_light()
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx", 
+                      sheet = "Fouss 22-23")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2022-23 Season Shot Log", y = "Points Per Shot",
+       title = "Fousseyni Traore Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2022-23 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + .5, xhigh - .5),
+                  ylim = c(0.5, 1.5)) +
+  theme_light()
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx", 
+                      sheet = "G 21-22")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2021-22 Season Shot Log", y = "Points Per Shot",
+       title = "Gideon George Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2021-22 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + 1.2, xhigh - 1.2),
+                  ylim = c(0, 1.5)) +
+  theme_light()
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx", 
+                      sheet = "G 22-23")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2022-23 Season Shot Log", y = "Points Per Shot",
+       title = "Gideon George Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2022-23 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + .5, xhigh - .5),
+                  ylim = c(0.5, 1.5)) +
+  theme_light()
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx", 
+                      sheet = "Johnson 21-22")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2021-22 Season Shot Log", y = "Points Per Shot",
+       title = "Spencer Johnson Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2021-22 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + 1.2, xhigh - 1.2),
+                  ylim = c(0.5, 1.75)) +
+  theme_light()
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx", 
+                      sheet = "Johnson 22-23")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2022-23 Season Shot Log", y = "Points Per Shot",
+       title = "Spencer Johnson Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2022-23 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + .35, xhigh - .35),
+                  ylim = c(0.5, 1.5)) +
+  theme_light()
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx", 
+                      sheet = "Atiki 22-23")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2022-23 Season Shot Log", y = "Points Per Shot",
+       title = "Atiki Ally Atiki Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2022-23 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + .5, xhigh - .5),
+                  ylim = c(0, 1.5)) +
+  theme_light()
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx", 
+                      sheet = "Hall 22-23")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2022-23 Season Shot Log", y = "Points Per Shot",
+       title = "Dallin Hall Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2022-23 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + .5, xhigh - .5),
+                  ylim = c(0.5, 1.5)) +
+  theme_light()
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx", 
+                      sheet = "Jax 22-23")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2022-23 Season Shot Log", y = "Points Per Shot",
+       title = "Jaxson Robinson Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2022-23 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + .5, xhigh - .5),
+                  ylim = c(0.5, 1.5)) +
+  theme_light()
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx", 
+                      sheet = "Richie 22-23")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2022-23 Season Shot Log", y = "Points Per Shot",
+       title = "Richie Saunders Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2022-23 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + .5, xhigh - .5),
+                  ylim = c(.5, 2.5)) +
+  theme_light()
+```
+
+```{r, include=FALSE}
+Synergy <- read_excel("~/BYU Basketball/SSQ Synergy.xlsx", 
+                      sheet = "Stewart 22-23")
+```
+
+```{r, echo=FALSE, fig.align='center'}
+temp <- data.frame(aSSQ = approx(Synergy$Game, Synergy$aSSQ, n = 500),
+                        aPPS = approx(Synergy$Game, Synergy$aPPS, n = 500),
+                        Game = approx(Synergy$Game, n = 500))
+
+temp$midup <- pmin(temp$aSSQ.y, temp$aPPS.y)
+xlow <- min(Synergy$Game)
+xhigh <- max(Synergy$Game)
+
+ggplot(data = temp) +
+  geom_ribbon(ymin = temp$midup,
+              aes(x = Game.y,
+                  ymax = aPPS.y),
+              fill = "#f2d4d4",
+              show.legend = F) +
+  geom_ribbon(ymax = temp$aSSQ.y,
+              aes(x = Game.y,
+                  ymin = midup),
+              fill = "#c1daec",
+              show.legend = F) +
+  geom_line(aes(Game.y, aPPS.y)) +
+  geom_line(aes(Game.y, aSSQ.y), color = "#838383") +
+  guides(linetype = "none", fill = "none") +
+  labs(x = "2022-23 Season Shot Log", y = "Points Per Shot",
+       title = "Trey Stewart Shot Making",
+       subtitle = "Points per shot and expected points per shot (ie. 'Synergy Shot Quality')\nduring the 2022-23 CBB season, as 5-game rolling averages.") +
+  coord_cartesian(xlim = c(xlow + .5, xhigh - .5),
+                  ylim = c(0, 1.5)) +
+  theme_light()
+```

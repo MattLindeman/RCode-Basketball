@@ -1,0 +1,76 @@
+---
+title: "Analysis of Assists to Turnovers: Their Causes, Effects, and BYU's Potential Goals"
+author: "Matthew Lindeman"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+For this project I decided to focus on the calculating and analyzing of statistics, through the help of RStudio. Along with the statistics, I added discussion on ways the statistics could prove valuable for the team this upcoming season. All of the data I gathered is based on the 2021-2022 BYU basketball season, and a complete version of the [data set](#dataset)$_1$ will be provided at the end of this document.
+
+```{r data, echo = FALSE, message = FALSE}
+library(tidyverse)
+library(readxl)
+BYU_Basketball_Dataset <- read_excel("BYU Basketball Dataset.xlsx")
+BYU_Basketball_Dataset <- BYU_Basketball_Dataset %>%
+  mutate(`Ast/To` = round(Assists / Turnovers, 2))
+```
+
+## Analysis
+
+I decided to analyze a few metrics that I felt would make an impact on the end result of a game. I looked at offensive rebound rate, defensive rebound rate, opponent free throws, assists, and turnovers. After looking at those metrics, the ones that stood out the most as impacting the game were assists and turnovers. In the 24 games that BYU won, the team averaged 16.4 assists while only averaging 10.8 assists in the 11 losses. For turnovers BYU averaged 11.5 in games won and 15.1 in games lost. The differences in assists and turnovers between wins and losses struck me, so I decided to graph the statistics for each game to see if there was a correlation between the two.   
+
+
+```{r scatter, echo = FALSE}
+BYU_Basketball_Dataset %>%
+  ggplot(mapping = aes(x = Assists, y = Turnovers, color = Result)) +
+  geom_point() +
+  labs(
+    title = "Assists and Turnovers Compared with Game Result",
+    subtitle = "BYU Basketball 2021-2022 Season"
+  ) +
+  guides(color = guide_legend(reverse = TRUE)) +
+  scale_color_manual(values = c("brown2", "blue"))
+```
+
+
+From this graph it can be observed that there is a correlation between assists, turnovers, and the result of the game. It comes as no surprise that in most of the losses BYU had a high number of turnovers and a low number of assists. Where the value lies in this graph is the benchmark it creates. When BYU held their turnovers under 15 they won 81% of those games. When BYU got at least 15 assists they won 94% of those games. Then if you combine the two (under 15 turnovers and at least 15 assists) you can see that BYU won 100% of those games. These benchmarks could then be used as specific and measurable goals for the team this upcoming season. The team could have a goal going into each game to keep the turnovers under 15 and to assist on at least 15 field goals. Having specific goals for these statistics will allow the team to track their progress during a game, and adjust accordingly to achieve the goals.
+
+
+After creating the scatter plot, I created a box plot of the assist to turnover ratio to further support these benchmarks and to give myself a basis for where to start when it came to studying film.
+
+```{r box, echo = FALSE}
+BYU_Basketball_Dataset %>%
+  ggplot(mapping = aes(x = `Ast/To`, y = Result, fill = Result)) +
+  geom_boxplot() +
+  labs(
+    title = "Assist to Turnover Ratio Compared with Game Result",
+    subtitle = "BYU Basketball 2021-2022 Season"
+  ) +
+  theme_classic() +
+  theme(legend.position = "none") +
+  scale_fill_manual(values = c("brown2", "blue1"))
+```
+
+
+From the box plot a substantial difference can be observed when the assist to turnover ratio is above or below 1. When BYU had a ratio below 1 they lost 10 out of those 14 games, but when they had a ratio of at least 1 they only lost 1 out of those 21 games. This piqued my curiosity to then look into the games where BYU had a lot of turnovers and not many assists. I decided to re-watch the game BYU played against Saint Mary's on February 19, 2022 because that game was BYU's season low for assist to turnover ratio at 0.35. While watching the game I looked for things that could maybe indicate why the ratio was so low. I came in with questions such as: what did the opponent do about pace, what size did the opponent have on the floor, what was the defensive pressure like, and did BYU have any trends that may have led to the low ratio?
+
+Saint Mary's plays at a very slow pace, and they like to play big and physical. This limited the amount of the fast break opportunities BYU was able to get and forced BYU into a lot of late shot clocks. The late shot clocks forced BYU to continually take contested shots and sometimes make poor passes trying to make a play happen. I also noticed a trend where BYU was having a lot of possessions where everything became stagnant after the ball was passed into a post player (waiting to attack in the post and little off-ball movement). This led to a lot of contested post-shot attempts, little ball movement, and a few turnovers. A few good examples from the game of this occurring can be found at these game clock time stamps: 17:15 in the 1st half, 9:45 in the 1st half, 3:10 in the 1st half, and 15:20 in the 2nd half ([A link to the BYU TV game footage can be found here](https://www.byutv.org/player/9124c261-3069-4246-b7bb-93bde0f1b350/byu-mens-basketball-byu-vs-saint-marys-21922)). For this game it seemed like a possible solution to the low assists and high turnovers would have been to attack faster in the post, have more off ball movement, and have some playmaking move through the post. While this finding can't be generalized to all of the games where BYU had a low ast/to ratio, it can be useful to know for games this upcoming season. If this trend is seen popping up in a game, then adjustments can be made earlier to improve playmaking, movement, and ball control for the remainder of the game. 
+
+## Conclusion
+
+While it is obvious that more assists and fewer turnovers lead to more team wins, having a specific, measurable goal of assists and turnovers and a plan to achieve it can help lead BYU to victory. More research into factors that affected the ast/to rate can help improve this plan. I would also love to analyze other factors that could correlate with wins, such as player biomechanics (shooting form, hip angle on drives, tendencies in the paint when jump stopping versus doing a full gather) and player lineup's plus/minus, but the research on assists and turnovers is important to me because they have such a huge impact on the offensive and defensive aspects of the game and are statistics that can be practiced and improved.
+
+## Data Set {#dataset}
+
+```{r data chart, echo = FALSE, message = FALSE}
+knitr::kable(BYU_Basketball_Dataset)
+```
+
+$_1$Based on the statistics recorded by ESPN
